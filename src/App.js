@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+// App.js
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import UserNavBar from './components/UserNavBar';
+import AdminNavBar from './components/AdminNavBar';
+import Home from './pages/Home';
+import AdminDashboard from './pages/AdminDashboard';
+// Other imports for routes and pages
 
-function App() {
+const App = () => {
+  const userRole = "admin"; // Example role, this would be set dynamically based on auth
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      {userRole === "admin" ? <AdminNavBar /> : <UserNavBar />}
+      <Routes>
+        <Route path="/" exact component={Home} />
+        <Route path="/admin" component={AdminDashboard} />
+        {/* Other routes */}
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;
